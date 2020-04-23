@@ -22,7 +22,7 @@ DEPFLAGS=-MT $@ -MMD -MP -MF $(DEP)/$*.d
 RM=rm -rf
 
 # Programs to compile
-PROGRAMS=condBranchMispred returnStackBuffer indirBranchMispred
+PROGRAMS=spectre
 BINS=$(addprefix $(BIN)/,$(addsuffix .riscv,$(PROGRAMS)))
 DUMPS=$(addprefix $(DMP)/,$(addsuffix .dump,$(PROGRAMS)))
 
