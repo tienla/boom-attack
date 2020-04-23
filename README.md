@@ -2,14 +2,6 @@
 
 This repository holds all the work-in-progress code used to check if BOOM is susceptible to Spectre attacks.
 
-# Project Members
-
-| Name             | Github Handle |
-| ---------------- | ------------- |
-| Abraham Gonzalez | abejgonzalez  |
-| Ed Younis        | riyt          |
-| Ben Korpan       | bkorpan       |
-| Jerry Zhao       | jerry123      |
 
 # Further Details
 
@@ -41,23 +33,6 @@ Offset Size   : 13
 ==GShare==
 (2 kB) GShare Predictor, with 23 bits of history for (2-wide fetch) and 4096 entries.
 ```
-
-## Implemented Attacks
-
-The following attacks are implemented within the repo.
-
-* Spectre-v1 or Bounds Check Bypass [1]
-    * condBranchMispred.c
-* Spectre-v2 or Branch Target Injection [1]
-    * indirBranchMispred.c
-
-## Not Completed Attacks
-
-The following attacks are in-progress and are not working yet.
-
-* Return Stack Buffer Attack [2]
-    * returnStackBuffer.c
-    * Main reason why this doesn't work is because the RSB was disconnected in the BPU (commented out). 
 
 # Building the tests
 
