@@ -59,6 +59,7 @@ void wantFunc(){
  * @input idx input to be used to idx the array
  */
 void victimFunc(uint64_t idx){
+    asm("fence rw rw");
     uint8_t dummy = array2[array1[idx] * L1_BLOCK_SZ_BYTES];
 }
 
