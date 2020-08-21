@@ -22,12 +22,12 @@ DEPFLAGS=-MT $@ -MMD -MP -MF $(DEP)/$*.d
 RM=rm -rf
 
 # Programs to compile
-PROGRAMS=spectre
+PROGRAMS=spectrev1 spectrev2 spectre-fence spectre-SLH
 BINS=$(addprefix $(BIN)/,$(addsuffix .riscv,$(PROGRAMS)))
 DUMPS=$(addprefix $(DMP)/,$(addsuffix .dump,$(PROGRAMS)))
 
 .PHONY: all
-all: $(BINS) $(DUMPS)
+all: $(BINS)
 
 dumps: $(DUMPS)
 
@@ -44,7 +44,9 @@ $(OBJ)/%.o: $(SRC)/%.c
 # Build executable
 $(BIN)/%.riscv: $(OBJ)/%.o $(OBJ)/crt.o $(OBJ)/syscalls.o $(OBJ)/stack.o $(LNK)/link.ld
 	@mkdir -p $(BIN)
-	$(CC) -T $(LNK)/link.ld $(LDFLAGS) $< $(OBJ)/crt.o $(OBJ)/stack.o $(OBJ)/syscalls.o -o $@
+	$(CC) $<  -o $@
+	#Uncomment for make baremetal
+	#$(CC) -T $(LNK)/link.ld $(LDFLAGS) $< $(OBJ)/crt.o $(OBJ)/stack.o $(OBJ)/syscalls.o -o $@
 
 # Build dump
 $(DMP)/%.dump: $(BIN)/%.riscv
@@ -60,3 +62,4 @@ clean:
 
 # Include dependencies
 -include $(addprefix $(DEP)/,$(addsuffix .d,$(PROGRAMS)))
+
