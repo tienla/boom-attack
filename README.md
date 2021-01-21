@@ -25,11 +25,24 @@ src:
 
 #How to use
 
-1. On ZC706
+1. On VC707
+
+Test environment: 
+
+- tee-hardware: https://github.com/uec-hanken/tee-hardware (version: 2109e57ee411b2b4179cbf62fc84549d9b519d76)
+
+Make using Makefile.GLibc or Makefile.Newlib
+
+Copy the elf files into SD Card and load to run on Linux on FPGA
+
+$./spectrev1.riscv
+
+2. On ZC706
 
 Clone the repository
 
 $ git clone https://github.com/riscv-boom/fpga-zynq
+
 $ git checkout bdd16b4642716aa48346bfd30f73a80278eb5849
 
 Perform the following modifications
@@ -40,19 +53,27 @@ Perform the following modifications
 - Run (common command)
 
 $ make init-submodules #update submodule in the repository
+
 $ make rocket #generating Verilog for two-wide boom
+
 $ make project #generate a Vivado project
+
 $ make fpga-images-zybo/boot.bin #Repacking boot.bin
+
 
 On the terminal
 
 $ ./fesvr-zynq pk hello #Run riscv app
+
 $ ./fesvr-zynq bbl #Boot linux on BOOM Core
+
 
 Connect the SD card
 
 $ mkdir sd
+
 $ mount /dev/mmblkb0p1 sd/
+
 
 Boot up the board
 
@@ -71,7 +92,9 @@ Please follow these instructions:
 - Execute the following commands:
 
 $ git clone https://github.com/tienla/boom-attack
+
 $ cd boom-attack
+
 $ make
 
 - Copy the "baremetal" binaries at "bin/spectre.riscv" into SD and run:
@@ -80,15 +103,5 @@ $ ./fesvr-zynq pk spectre.riscv
 
 - If the program could not run, re-check the toolchain.
 
-1. On VC707
 
-Test environment: 
-
-- tee-hardware: https://github.com/uec-hanken/tee-hardware (version: 2109e57ee411b2b4179cbf62fc84549d9b519d76)
-
-Make using Makefile.GLibc or Makefile.Newlib
-
-Copy the elf files into SD Card and load to run on Linux on FPGA
-
-$./spectrev1.riscv
 
